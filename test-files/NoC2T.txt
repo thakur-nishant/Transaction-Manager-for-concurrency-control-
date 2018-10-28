@@ -1,5 +1,5 @@
 // serializable history
-// 2 transactions (no conflicts)
+// 2 transactions(no conflicts)
 // same object accessed
 // multiple times
 Log NoC2T.log

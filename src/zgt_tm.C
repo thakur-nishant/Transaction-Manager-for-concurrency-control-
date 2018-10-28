@@ -11,7 +11,7 @@
 #include "zgt_tm.h"
 #include "zgt_extern.h"
 
-#define TEAM_NO -1    //insert your team number here
+#define TEAM_NO 19    //insert your team number here
 
 //Sets the value of member function logfile and opens the file for writing
 //in the append mode
@@ -113,16 +113,83 @@ int zgt_tm::TxRead(long tid, long obno, int thrNum)
 int zgt_tm::TxWrite(long tid, long obno, int thrNum)
  {
 	//write your code
+#ifdef TM_DEBUG
+   printf("\nentering TxWrite\n");fflush(stdout);
+   fflush(stdout);
+#endif
+   pthread_t thread1;
+   
+   struct param *nodeinfo = (struct param*)malloc(sizeof(struct param));
+   nodeinfo->tid = tid;
+   nodeinfo->obno = obno;
+   nodeinfo->Txtype = ' ';
+   nodeinfo->count = --SEQNUM[tid];
+   int status;
+   status = pthread_create(&threadid[thrNum],NULL,writetx,(void*)nodeinfo);
+   if (status){
+     printf("ERROR: return code from pthread_create() is:%d\n", status);
+     exit(-1);
+   }
+   
+#ifdef TM_DEBUG
+   printf("\nleaving TxWrite\n");
+   fflush(stdout);
+#endif
+   return(0);   //successful operation
  }
 
 int zgt_tm::CommitTx(long tid, int thrNum)
  {
 	//write your code
+#ifdef TM_DEBUG
+   printf("\nentering CommitTx\n");fflush(stdout);
+   fflush(stdout);
+#endif
+   pthread_t thread1;
+   
+   struct param *nodeinfo = (struct param*)malloc(sizeof(struct param));
+   nodeinfo->tid = tid;
+   nodeinfo->Txtype = ' ';
+   nodeinfo->count = --SEQNUM[tid];
+   int status;
+   status = pthread_create(&threadid[thrNum],NULL,committx,(void*)nodeinfo);
+   if (status){
+     printf("ERROR: return code from pthread_create() is:%d\n", status);
+     exit(-1);
+   }
+   
+#ifdef TM_DEBUG
+   printf("\nleaving CommitTx\n");
+   fflush(stdout);
+#endif
+   return(0);   //successful operation
  }
  
 int zgt_tm::AbortTx(long tid, int thrNum)
  {
 	//write your code
+#ifdef TM_DEBUG
+   printf("\nentering AbortTx\n");fflush(stdout);
+   fflush(stdout);
+#endif
+   pthread_t thread1;
+   
+   struct param *nodeinfo = (struct param*)malloc(sizeof(struct param));
+   nodeinfo->tid = tid;
+   nodeinfo->Txtype = ' ';
+   nodeinfo->count = --SEQNUM[tid];
+   int status;
+   status = pthread_create(&threadid[thrNum],NULL,aborttx,(void*)nodeinfo);
+   if (status){
+     printf("ERROR: return code from pthread_create() is:%d\n", status);
+     exit(-1);
+   }
+   
+#ifdef TM_DEBUG
+   printf("\nleaving AbortTx\n");
+   fflush(stdout);
+#endif
+   return(0);   //successful operation
  }
 
 

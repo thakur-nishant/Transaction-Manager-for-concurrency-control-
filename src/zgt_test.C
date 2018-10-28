@@ -99,11 +99,10 @@ if (! inFile.is_open())
        Tokenize(s, tokens);
 
        
-
       if (tokens[0] == "//" ) cout << s << "\n";
        else if(tokens[0] =="Log" || tokens[0] == "log"){
 	 cout << "Log file name:" << tokens[1] << "\n\n";  
-	 //	printf("\nLog :", tokens[1]);
+	 	// printf("\nLog :", tokens[1]);
          ZGT_Sh->openlog(tokens[1]);
        }
     

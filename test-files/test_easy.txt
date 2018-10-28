@@ -1,0 +1,18 @@
+// serializable history
+log test_easy.log
+BeginTx 1 W
+Read    1 4
+Read    1 5
+BeginTx 2 W
+Read    2 1
+Write   2 6
+BeginTx 3 W
+Write   1 4
+Read    3 3
+Write   1 4
+Write   3 3
+Write   2 2
+Read    3 7
+commit 3
+Commit  2
+commit 1

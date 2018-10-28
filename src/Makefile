@@ -24,7 +24,7 @@ CC=$(DIRPATH)/bin/g++
 #DEBUGFLAGS =  -DTX_DEBUG # -DTM_DEBUG -DHT_DEBUG
 
 #Below, all are enabled; you can disable it as you wish
-DEBUGFLAGS = -DTX_DEBUG -DTM_DEBUG -DHT_DEBUG
+DEBUGFLAGS = #-DTX_DEBUG -DTM_DEBUG -DHT_DEBUG
 
 INCLUDES = -I${TXMGR}/include -I.
 
@@ -35,7 +35,7 @@ SRCS = zgt_test.C zgt_tm.C zgt_tx.C zgt_ht.C zgt_semaphore.C
 OBJS = $(SRCS:.C=.o)
 
 $(MAIN):  $(OBJS) Makefile
-	 $(CC) -lpthread $(CFLAGS) $(DEBUGFLAGS) $(INCLUDES) $(OBJS) -o $(MAIN) $(LFLAGS)
+	 $(CC) $(CFLAGS) $(DEBUGFLAGS) $(INCLUDES) $(OBJS) -o $(MAIN) $(LFLAGS) -lpthread 
 
 .C.o:
 	$(CC) $(CFLAGS) $(INCLUDES) $(LINCLUDES) $(DEBUGFLAGS) -c $<

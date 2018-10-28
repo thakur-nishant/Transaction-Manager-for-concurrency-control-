@@ -1,0 +1,12 @@
+// serializable history
+log test1.log
+BeginTx 2 W
+Read    2 1
+Write   2 3
+BeginTx 3 W
+Read    3 3
+Write   3 3
+Write   2 2
+Read    3 2
+commit 3
+Commit  2
